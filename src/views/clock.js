@@ -1,3 +1,5 @@
+/** @jsx React.DOM **/
+
 var React       = require('react');
 
 var TimeStore   = require('../stores/time');
@@ -30,7 +32,7 @@ var Clock = React.createClass({
 	},
 
 	render: function() {
-		return React.DOM.p({ children: this.state.time });
+		return <p>{ this.state.time }</p>
 	},
 
 	_onChange: function() {

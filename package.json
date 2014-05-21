@@ -11,14 +11,21 @@
   },
   "author": "",
   "license": "ISC",
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  },
   "dependencies": {
-    "envify": "^1.2.1",
     "react": "^0.10.0",
     "es6-promise": "^1.0.0",
     "colors": "^0.6.2"
   },
   "devDependencies": {
     "watchify": "^0.10.1",
-    "browserify": "^4.1.5"
+    "browserify": "^4.1.5",
+    "reactify": "^0.13.1",
+    "envify": "^1.2.1"
   }
 }
