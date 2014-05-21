@@ -1,3 +1,4 @@
 node_modules
 browser-bundle.js
+browser-bundle.min.js
 .DS_STORE
