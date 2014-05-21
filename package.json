@@ -1,0 +1,24 @@
+{
+  "name": "capacitor",
+  "version": "0.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "STATIC_ROOT=./static watchify -o browser-bundle.js -v -d .",
+    "build": "STATIC_ROOT=./static NODE_ENV=production browserify . | uglifyjs -cm > browser-bundle.min.js",
+    "collect-static": "collect-static . ./static",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "envify": "^1.2.1",
+    "react": "^0.10.0",
+    "es6-promise": "^1.0.0",
+    "colors": "^0.6.2"
+  },
+  "devDependencies": {
+    "watchify": "^0.10.1",
+    "browserify": "^4.1.5"
+  }
+}
