@@ -1,7 +1,7 @@
 var DataDispatcher = require('../dispatchers/data');
 var StorageBus     = require('../buses/storage');
 var Store          = require("./store");
-var merge = require('react/lib/merge');
+var merge          = require('react/lib/merge');
 
 var Time = Store.clone({
 	_data: {
