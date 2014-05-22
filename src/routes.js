@@ -4,7 +4,7 @@ var qs = require('querystring');
 var routes = {
 	'/': function() {
 		HistoryActions.update({
-			route: '/',
+			path: '',
 			search: qs.parse(window.location.search.slice(1))
 		});
 	}

@@ -7,7 +7,8 @@ var qs = require('querystring');
 
 var History = Store.clone({
 	_data: {
-		search: {}
+		path   : '',
+		search : {}
 	},
 
 	get: function() {
@@ -15,8 +16,10 @@ var History = Store.clone({
 	},
 
 	getURL: function() {
-		var params = qs.stringify(History._data.search);
-		return location.pathname + (params? '?' + params : '');
+		var location = History.get();
+		var params = qs.stringify(location.search);
+
+		return location.path + (params? '?' + params : '');
 	},
 
 	set: function(props) {
