@@ -2,13 +2,13 @@ var StorageBus      = require('../buses/storage');
 var StateDispatcher = require('../dispatchers/state');
 var Store           = require("./store");
 var merge           = require('react/lib/merge');
-
-var qs = require('querystring');
+var qs              = require('querystring');
+var location        = window.location;
 
 var History = Store.clone({
 	_data: {
-		path   : '',
-		search : {}
+		path   : window.location.pathname,
+		search : qs.parse(window.location.search)
 	},
 
 	get: function() {
