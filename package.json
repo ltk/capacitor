@@ -20,8 +20,7 @@
   "dependencies": {
     "react": "^0.10.0",
     "es6-promise": "^1.0.0",
-    "colors": "^0.6.2",
-    "director": "^1.2.3"
+    "colors": "^0.6.2"
   },
   "devDependencies": {
     "watchify": "^0.10.1",

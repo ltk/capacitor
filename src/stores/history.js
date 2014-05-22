@@ -8,7 +8,7 @@ var location        = window.location;
 var History = Store.clone({
 	_data: {
 		path   : window.location.pathname,
-		search : qs.parse(window.location.search)
+		search : qs.parse(window.location.search.slice(1))
 	},
 
 	get: function() {
