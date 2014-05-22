@@ -14,7 +14,6 @@ var Time = Store.clone({
 
 	set: function(props) {
 		Time._data = merge(Time._data, props);
-		StorageBus.send('TIME_UPDATE', this.get());
 		return true;
 	}
 });
@@ -22,6 +21,7 @@ var Time = Store.clone({
 Time.register(DataDispatcher, 'TIME_UPDATE', function(payload, resolve, reject) {
 	if (Time.set(payload)) {
 		resolve(payload);
+		StorageBus.send('TIME_UPDATE', Time.get());
 	} else {
 		reject(new Error({ message: 'Unable to set Time', payload: payload }));
 	}
