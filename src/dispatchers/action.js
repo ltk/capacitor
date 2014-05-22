@@ -1,4 +1,4 @@
-var Dispatcher       = require('../../lib/dispatcher');
+var Dispatcher       = require('./dispatcher');
 var ActionsBus       = require('../buses/actions');
 var ActionDispatcher = new Dispatcher();
 

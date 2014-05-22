@@ -1,11 +1,10 @@
 var Promise        = require('es6-promise').Promise;
-var Store          = require('../../lib/store');
 var DataDispatcher = require('../dispatchers/data');
 var StorageBus     = require('../buses/storage');
 
 var merge = require('react/lib/merge');
 
-var Time = Store.clone({
+var Time = {
 	_data: {
 		time: Date.now()
 	},
@@ -19,14 +18,14 @@ var Time = Store.clone({
 		StorageBus.send('TIME_UPDATE', this.get());
 		return true;
 	}
-});
+}
 
 DataDispatcher.register('TIME_UPDATE', function(payload) {
 	return new Promise(function(resolve, reject) {
 		if (Time.set(payload)) {
 			resolve(payload);
 		} else {
-			reject(new Error('Unable to set Time'))
+			reject(new Error({ message: 'Unable to set Time', payload: payload ));
 		}
 	});
 });
