@@ -10,7 +10,7 @@ var getState = function() {
 
 var Layout = React.createClass({
 
-	getInitialState: function() {
+	getDefaultProps: function() {
 		return getState();
 	},
 
@@ -19,18 +19,18 @@ var Layout = React.createClass({
 	},
 
 	render: function() {
-		var handler = this.state.handler || Error404;
+		var handler = this.props.handler || Error404;
 
 		return (
             <main>
                 <Navigation />
-				{handler(this.state.params)}
+				{handler(this.props.params)}
 			</main>
         );
 	},
 
 	_onHistoryChange: function() {
-		this.setState(getState());
+		this.setProps(getState());
 	}
 });
 

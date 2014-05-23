@@ -5,23 +5,21 @@ require('node-jsx').install({
 
 var React  = require('react');
 var fs     = require('fs');
-var History = require('./stores/history');
 var Layout  = require('./views/layout');
 var express = require('express');
-
+var url = require("url");
 var app = express();
-
+var routes = require('./routes');
 app.use(express.static(__dirname + '/../'));
 
 app.get('/*', function(req, res) {
-	History.push(req.url);
-
 	fs.readFile(__dirname + '/../index.html', function(err, content) {
 		res.set({
 			'Content-Type': 'text/html'
 		});
 
-		var view = React.renderComponentToString(Layout());
+		var props = routes.resolve(req.url);
+		var view = React.renderComponentToString(Layout(props));
 
 		res.end(content.toString().replace('{{app}}', view));
 	});

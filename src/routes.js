@@ -1,20 +1,11 @@
-var Router = require('route-recognizer').default;
+var Router = require("../lib/router");
 
-var routes = new Router();
+var router = new Router();
 
-routes.add([{
-	handler  : require('./views/pages/index.jsx'),
-	path     : '/'
-}]);
+router.match(function(map) {
+	map('/', require('./views/pages/index.jsx'));
+	map('/about', require('./views/pages/about.jsx'));
+	map('/contact', require('./views/pages/contact.jsx'));
+});
 
-routes.add([{
-	handler : require('./views/pages/about.jsx'),
-	path    : '/about'
-}]);
-
-routes.add([{
-	handler : require('./views/pages/contact.jsx'),
-	path    : '/contact'
-}]);
-
-module.exports = routes;
+module.exports = router;

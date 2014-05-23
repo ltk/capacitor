@@ -18,16 +18,8 @@ var History = require('../../lib/store').clone({
 	},
 
 	push: function(pathname) {
-		var resolved = routes.recognize(pathname);
-
-		if (resolved) {
-			History.set({
-				handler   : resolved[0].handler,
-				params    : resolved[0].params,
-				search    : null,
-				pathname  : pathname
-			});
-		}
+		var resolved = routes.resolve(pathname);
+		History.set(routes.resolve(pathname));
 	},
 
 	set: function(props) {
