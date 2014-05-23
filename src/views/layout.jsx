@@ -1,3 +1,4 @@
+/** @jsx React.DOM **/
 var React   = require('react');
 var History = require('../stores/history');
 var Error404 = require('./errors/404.jsx');

@@ -7,29 +7,25 @@ var History = require('../../lib/store').clone({
 
 	toString: function() {
 		var data = History.get();
-		var path = data.path;
+		var path = data.pathname;
 		var query = qs.stringify(data.search);
 
-		if (query) {
-			path += '?' + query;
-		}
-
-		return path;
+		return query? path + '?' + query : path;
 	},
 
 	get: function() {
 		return History._data;
 	},
 
-	push: function(path) {
-		var resolved = routes.recognize(path);
+	push: function(pathname) {
+		var resolved = routes.recognize(pathname);
 
 		if (resolved) {
 			History.set({
 				handler   : resolved[0].handler,
 				params    : resolved[0].params,
 				search    : null,
-				path      : path
+				pathname  : pathname
 			});
 		}
 	},

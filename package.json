@@ -2,10 +2,10 @@
   "name": "capacitor",
   "version": "0.0.0",
   "description": "",
-    "main": "src/browser.js",
+  "main": "src/browser.js",
   "scripts": {
-    "start": "STATIC_ROOT=./static watchify --debug=false -o browser-bundle.js -v -d .",
-    "build": "STATIC_ROOT=./static NODE_ENV=production browserify . | uglifyjs -cm > browser-bundle.min.js",
+    "start": "watchify --debug=false -o browser-bundle.js -v -d .",
+    "build": "NODE_ENV=production browserify . | uglifyjs -cm > browser-bundle.min.js",
     "collect-static": "collect-static . ./static",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,7 +26,9 @@
     "director": "^1.2.3",
     "exorcist": "^0.1.6",
     "react-async": "^0.9.2",
-    "react-router-component": "^0.18.3"
+    "react-router-component": "^0.18.3",
+    "node-jsx": "^0.10.0",
+    "express": "^4.3.0"
   },
   "devDependencies": {
     "watchify": "^0.10.1",
