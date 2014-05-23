@@ -6,6 +6,14 @@ var Dispatcher = function() {
 
 Dispatcher.prototype = {
 	register: function (actionType, callback) {
+		var dispatcher = this;
+
+		if (typeof actionType === 'object') {
+			return Object.keys(actionType).map(function(type) {
+				dispatcher.register(type, actionType[type]);
+			});
+		}
+
 		this._callbacks.push({
 			actionType : actionType,
 			behavior   : callback

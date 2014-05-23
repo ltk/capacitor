@@ -1,9 +1,7 @@
-var ActionsBus = require("../buses/actions");
+var State = require("../dispatchers/state");
 
-var Time = {
+var Time  = module.exports = {
 	update: function(props) {
-		ActionsBus.send('TIME_UPDATE', props);
+		State.dispatch('TIME_UPDATE', props);
 	}
-}
-
-module.exports = Time;
+};

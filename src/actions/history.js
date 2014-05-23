@@ -1,17 +1,9 @@
-var ActionsBus = require("../buses/actions");
+var App = require("../dispatchers/app");
 
 var History = {
-	update: function(props) {
-		ActionsBus.send('HISTORY_UPDATE', props);
-	},
-
-	filter: function(props) {
-		ActionsBus.send('HISTORY_FILTER', props);
-	},
-
-	clearFilter: function() {
-		ActionsBus.send('HISTORY_CLEAR_FILTER');
+	push: function(path) {
+		App.dispatch('HISTORY_PUSH', path);
 	}
-}
+};
 
 module.exports = History;

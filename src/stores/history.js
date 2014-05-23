@@ -1,58 +1,53 @@
-var StorageBus      = require('../buses/storage');
-var StateDispatcher = require('../dispatchers/state');
-var Store           = require("./store");
-var merge           = require('react/lib/merge');
-var qs              = require('querystring');
-var location        = window.location;
+var App      = require('../dispatchers/app');
+var routes   = require("../routes");
+var qs       = require('querystring');
 
-var History = Store.clone({
-	_data: {
-		path   : window.location.pathname,
-		search : qs.parse(window.location.search.slice(1))
+var History = require('../lib/store').clone({
+	_data: {},
+
+	toString: function() {
+		var data = History.get();
+		var path = data.path;
+		var query = qs.stringify(data.search);
+
+		if (query) {
+			path += '?' + query;
+		}
+
+		return path;
 	},
 
 	get: function() {
 		return History._data;
 	},
 
-	getURL: function() {
-		var location = History.get();
-		var params = qs.stringify(location.search);
+	push: function(path) {
+		var resolved = routes.recognize(path);
 
-		return location.path + (params? '?' + params : '');
+		if (resolved) {
+			History.set({
+				handler   : resolved[0].handler,
+				params    : resolved[0].params,
+				search    : null,
+				path      : path
+			});
+		}
 	},
 
 	set: function(props) {
-		History._data = merge(History._data, props);
+		Object.keys(props).reduce(function(data, key) {
+			data[key] = props[key];
+			return data;
+		}, History._data);
 
+		History.emitChange();
+	}
+});
+
+App.register({
+	HISTORY_PUSH: function(path) {
+		History.push(path);
 		return true;
-	}
-});
-
-History.register(StateDispatcher, 'HISTORY_UPDATE', function(payload, resolve, reject) {
-	if (History.set(payload)) {
-		resolve(payload);
-		StorageBus.send('HISTORY_UPDATE', History.get());
-	} else {
-		reject(new Error({ message: 'Unable to set History', payload: payload }));
-	}
-});
-
-History.register(StateDispatcher, 'HISTORY_FILTER', function(payload, resolve, reject) {
-	if (History.set({ search: payload })) {
-		resolve(payload);
-		StorageBus.send('HISTORY_FILTER', History.get());
-	} else {
-		reject(new Error({ message: 'Unable to set History', payload: payload }));
-	}
-});
-
-History.register(StateDispatcher, 'HISTORY_CLEAR_FILTER', function(payload, resolve, reject) {
-	if (History.set({ search: {} })) {
-		resolve(payload);
-		StorageBus.send('HISTORY_FILTER', History.get());
-	} else {
-		reject(new Error({ message: 'Unable to set History', payload: payload }));
 	}
 });
 

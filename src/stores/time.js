@@ -1,9 +1,6 @@
-var DataDispatcher = require('../dispatchers/data');
-var StorageBus     = require('../buses/storage');
-var Store          = require("./store");
-var merge          = require('react/lib/merge');
+var Storage = require('../dispatchers/storage');
 
-var Time = Store.clone({
+var Time = require('../lib/store').clone({
 	_data: {
 		time: Date.now()
 	},
@@ -13,17 +10,19 @@ var Time = Store.clone({
 	},
 
 	set: function(props) {
-		Time._data = merge(Time._data, props);
-		return true;
+		Object.keys(props).reduce(function(data, key) {
+			data[key] = props[key];
+			return data;
+		}, Time._data);
+
+		Time.emitChange();
 	}
 });
 
-Time.register(DataDispatcher, 'TIME_UPDATE', function(payload, resolve, reject) {
-	if (Time.set(payload)) {
-		resolve(payload);
-		StorageBus.send('TIME_UPDATE', Time.get());
-	} else {
-		reject(new Error({ message: 'Unable to set Time', payload: payload }));
+Storage.register({
+	TIME_UPDATE: function(payload) {
+		Time.set(payload);
+		return true;
 	}
 });
 
