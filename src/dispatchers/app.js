@@ -1,4 +1,4 @@
-var Dispatcher = require('../lib/dispatcher');
+var Dispatcher = require('../../lib/dispatcher');
 
 var State = new Dispatcher();
 

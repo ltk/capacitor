@@ -2,7 +2,7 @@ var App      = require('../dispatchers/app');
 var routes   = require("../routes");
 var qs       = require('querystring');
 
-var History = require('../lib/store').clone({
+var History = require('../../lib/store').clone({
 	_data: {},
 
 	toString: function() {

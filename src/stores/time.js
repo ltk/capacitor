@@ -1,6 +1,6 @@
 var Storage = require('../dispatchers/storage');
 
-var Time = require('../lib/store').clone({
+var Time = require('../../lib/store').clone({
 	_data: {
 		time: Date.now()
 	},

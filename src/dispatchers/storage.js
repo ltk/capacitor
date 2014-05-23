@@ -1,4 +1,4 @@
-var Dispatcher = require('../lib/dispatcher');
+var Dispatcher = require('../../lib/dispatcher');
 
 var Persistence = new Dispatcher();
 
