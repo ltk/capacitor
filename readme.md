@@ -1,5 +1,6 @@
 ```
 npm install -d
-npm start
-open index.html
+node src/server
 ```
+
+Then go to http://localhost:3000
